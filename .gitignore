@@ -3,3 +3,5 @@ scan1-*
 *.swp
 *.swo
 
+
+/vendor/

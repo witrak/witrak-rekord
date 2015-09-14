@@ -1,0 +1,16 @@
+{
+    "name": "witrak/witrak-rekord",
+    "description": "witrak is framework for managing recorded WiFi traffic and identification of device owners. witrak-rekord is part of witrak which is handling airodump-ng",
+    "type": "project",
+    "require": {
+        "doctrine/couchdb": "^1.0@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nemanjan00",
+            "email": "nemanjan00@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
