@@ -8,6 +8,8 @@ $clients = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'clients'))
 //$clients->createDatabase($clients->getDatabase());
 $probes = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'probes'));
 //$probes->createDatabase($probes->getDatabase());
+$aps = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'aps'));
+$aps->createDatabase($aps->getDatabase());
 
 // Initiate AiroDump log parser
 
@@ -46,4 +48,7 @@ foreach($log[1] as $device){
 			}		
 		}
 	}
+}
+
+foreach($log[0] as $ap){
 }
