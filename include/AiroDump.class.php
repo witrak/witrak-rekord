@@ -65,6 +65,13 @@ class AiroDump {
 				$data[1][$j][6] = Array();
 			}
 		}
+
+		for($i = 0; $i < count($data); $i++){
+			$data[$i][0] = $data[$i][count($data[$i])-1];
+
+			unset($data[$i][count($data[$i])-1]);
+		}
+
 		return $data;
 	}
 }
