@@ -69,8 +69,3 @@ class AiroDump {
 	}
 }
 
-$data = file_get_contents($argv[count($argv)-1]);
-
-$parser = new AiroDump();
-
-print_r($parser->ParseLog($data));
