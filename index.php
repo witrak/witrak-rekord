@@ -4,8 +4,10 @@ require __DIR__ . '/include/AiroDump.class.php';
 
 // Connect to CouchDB database
 
-$client = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'test'));
-// $client->createDatabase($client->getDatabase());
+$clients = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'clients'));
+//$clients->createDatabase($client->getDatabase());
+$probes = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'probes'));
+//$probes->createDatabase($client->getDatabase());
 
 // Initiate AiroDump log parser
 
@@ -19,14 +21,25 @@ $log = $airodump->ParseLog($log);
 
 // Populate into database
 
-foreach($log[1] as $device){
-	$query = $client->createViewQuery('client', 'by_mac');
-	$query->setKey($device[0]);
-	//$query->setIncludeDocs(true);
-	$result = $query->execute();
+/*
+    [0] => Station MAC
+    [1] => First time seen
+    [2] => Last time seen
+    [3] => Power
+    [4] => # packets
+    [5] => BSSID
+    [6] => Array
+	        (
+	            [0] => Probed ESSIDs
+	        )
+ */
 
-	if(count($result) == 0){
-		$client->postDocument(array('mac' => $device[0]));	
+foreach($log[1] as $device){
+	if(!$clients->findDocument($device[0])){
+		@$clients->postDocument(array('_id' => $device[0]));	
+	}
+
+	if(count($client[6])){
+		
 	}
 }
-
