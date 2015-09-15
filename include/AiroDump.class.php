@@ -2,29 +2,7 @@
 class AiroDump {
 
 	public function ParseLog($data){
-		$data = str_replace("\r", "", $data); // FUCK WINDOWS NEWLINE !!!
-
-		$data_new = $data; 
-
-		/* Do some cleanup */
-
-		do{
-			$data = $data_new; 
-
-			$data_new = str_replace("  ", " ", $data); // Remove duplicate comas
-		}while($data != $data_new);
-
-		$data = explode("\n\n", $data); // Explode into blocks
-
-		for($i = 0; $i < count($data); $i++){
-			$data[$i] = trim($data[$i], "\n"); // Remove newline from first argument of block
-
-			$data[$i] = str_replace(", ", ",", $data[$i]); // Remove space from begining of value
-		}
-
-		if($data[count($data) - 1] == ""){
-			unset($data[count($data) - 1]); //Remove empty block
-		}
+		$data = $this->CleanUp($data);
 
 		/* Cleanup done */
 
@@ -72,6 +50,33 @@ class AiroDump {
 			unset($data[$i][count($data[$i])-1]);
 		}
 
+		return $data;
+	}
+
+	private function CleanUp($data){	
+		$data = str_replace("\r", "", $data); // FUCK WINDOWS NEWLINE !!!
+
+		/* Do some cleanup */
+
+		$data_new = $data; 
+		
+		do{
+			$data = $data_new; 
+
+			$data_new = str_replace("  ", " ", $data); // Remove duplicate comas
+		}while($data != $data_new);
+
+		$data = explode("\n\n", $data); // Explode into blocks
+
+		for($i = 0; $i < count($data); $i++){
+			$data[$i] = trim($data[$i], "\n"); // Remove newline from first argument of block
+
+			$data[$i] = str_replace(", ", ",", $data[$i]); // Remove space from begining of value
+		}
+
+		if($data[count($data) - 1] == ""){
+			unset($data[count($data) - 1]); //Remove empty block
+		}
 		return $data;
 	}
 }

@@ -9,7 +9,7 @@ $clients = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'clients'))
 $probes = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'probes'));
 //$probes->createDatabase($probes->getDatabase());
 $aps = \Doctrine\CouchDB\CouchDBClient::create(array('dbname' => 'aps'));
-$aps->createDatabase($aps->getDatabase());
+#$aps->createDatabase($aps->getDatabase());
 
 // Initiate AiroDump log parser
 
@@ -50,5 +50,24 @@ foreach($log[1] as $device){
 	}
 }
 
+/*    
+    [0] => BSSID
+    [1] => First time seen
+    [2] => Last time seen
+    [3] => channel
+    [4] => Speed
+    [5] => Privacy
+    [6] => Cipher
+    [7] => Authentication
+    [8] => Power
+    [9] => # beacons
+    [10] => # IV
+    [11] => LAN IP
+    [12] => ID-length
+    [13] => ESSID
+    [14] => Key
+ */
+
 foreach($log[0] as $ap){
+	print_r($ap);
 }
